@@ -37,7 +37,7 @@ export default function Navbar({ onOpenQuote }) {
           </div>
           <div className="flex flex-col leading-none">
             <span className="text-xs font-semibold tracking-[0.2em] text-[#4f789e]">ROYAL</span>
-            <span className="text-lg font-bold tracking-tight text-[#34495e]">UPHOLSTERY</span>
+            <span className="text-lg font-bold tracking-tight text-[#34495e]">FURNISHING</span>
           </div>
         </a>
 

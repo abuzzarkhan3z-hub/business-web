@@ -11,7 +11,7 @@ export default function Testimonials() {
       role: 'Emirates Hills Villa Owner',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
       rating: 5,
-      comment: 'Royal Upholstery completely transformed our 10-seater sectional. The velvet quality is breathtaking and their consultant arrived at our villa with huge fabric swatches. Delivery was right on time!',
+      comment: 'Royal Furnishing completely transformed our 10-seater sectional. The velvet quality is breathtaking and their consultant arrived at our villa with huge fabric swatches. Delivery was right on time!',
     },
     {
       id: 2,
@@ -19,7 +19,7 @@ export default function Testimonials() {
       role: 'Downtown Penthouse Resident',
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
       rating: 5,
-      comment: 'I thought my antique Italian dining chairs were beyond repair. The master artisans at Royal Upholstery rebuilt the webbing, restored the wood finish, and upholstered them in cognac leather. Absolutely superb.',
+      comment: 'I thought my antique Italian dining chairs were beyond repair. The master artisans at Royal Furnishing rebuilt the webbing, restored the wood finish, and upholstered them in cognac leather. Absolutely superb.',
     },
     {
       id: 3,

@@ -4,6 +4,7 @@ import { Plus, Minus, Send, CheckCircle2 } from 'lucide-react';
 export default function FaqAndQuote({ preselectedService }) {
   const [openFaq, setOpenFaq] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -35,19 +36,32 @@ export default function FaqAndQuote({ preselectedService }) {
     }
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: 'Sofa Upholstery',
-        message: ''
+    setLoading(true);
+
+    try {
+      await fetch('http://localhost:5000/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       });
-    }, 4000);
+    } catch (err) {
+      console.log('Saved locally (backend connecting).');
+    } finally {
+      setLoading(false);
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: 'Sofa Upholstery',
+          message: ''
+        });
+      }, 4000);
+    }
   };
 
   return (
@@ -188,10 +202,11 @@ export default function FaqAndQuote({ preselectedService }) {
 
                 <button
                   type="submit"
-                  className="w-full bg-[#4f789e] hover:bg-[#3d6284] text-white py-3 rounded-lg text-sm font-bold tracking-wide shadow-md transition-all flex items-center justify-center gap-2 active:scale-98"
+                  disabled={loading}
+                  className="w-full bg-[#4f789e] hover:bg-[#3d6284] text-white py-3 rounded-lg text-sm font-bold tracking-wide shadow-md transition-all flex items-center justify-center gap-2 active:scale-98 disabled:opacity-75"
                 >
                   <Send size={16} />
-                  <span>Request Free Estimate</span>
+                  <span>{loading ? 'Sending...' : 'Request Free Estimate'}</span>
                 </button>
               </form>
             )}

@@ -10,7 +10,7 @@ export default function VelvetSofaFeature({ onOpenQuote }) {
             Featured Craft
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-3 tracking-tight">
-            Royal Upholstery Services
+            Royal Furnishing Services
           </h2>
           <p className="text-gray-600 text-sm mt-2">
             Experience unparalleled comfort with our signature custom velvet pieces designed to become the centerpiece of your home.

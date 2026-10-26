@@ -63,7 +63,7 @@ export default function ProjectsGallery({ onOpenQuote }) {
             Portfolio
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-3 tracking-tight">
-            Our Royal Upholstery Projects
+            Our Royal Furnishing Projects
           </h2>
           <p className="text-gray-600 text-sm mt-2 max-w-xl">
             A showcase of recent bespoke projects delivered across Dubai, Abu Dhabi, and the wider UAE.

@@ -18,7 +18,7 @@ export default function CtaBanner({ onOpenQuote }) {
             </div>
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-semibold text-blue-100">ROYAL</p>
-              <p className="text-base font-bold">UPHOLSTERY</p>
+              <p className="text-base font-bold">FURNISHING</p>
             </div>
           </div>
           <span className="hidden sm:inline-block text-xs bg-white/15 px-3 py-1 rounded-full text-blue-100">

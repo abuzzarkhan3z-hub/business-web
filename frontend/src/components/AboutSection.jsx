@@ -1,7 +1,7 @@
 import React from 'react';
 import { Ruler, ShieldCheck, Award, Sparkles, CheckCircle2 } from 'lucide-react';
 
-export default function AboutSection({ onOpenQuote }) {
+export default function AboutSection({ content, onOpenQuote }) {
   const highlights = [
     {
       icon: Ruler,
@@ -34,14 +34,14 @@ export default function AboutSection({ onOpenQuote }) {
             {/* Subtle soft backdrop ring */}
             <div className="absolute -inset-4 bg-[#f1f5f9] rounded-3xl -z-10 transform -rotate-1"></div>
             <img
-              src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80"
-              alt="Royal Upholstery Yellow Armchair"
+              src={content?.imageUrl || "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80"}
+              alt="Royal Furnishing Yellow Armchair"
               className="w-full h-auto object-cover rounded-2xl shadow-xl border border-gray-100"
             />
             {/* Floating Experience Badge */}
             <div className="absolute -bottom-6 -right-4 sm:right-6 bg-white p-4 rounded-xl shadow-xl border border-gray-100 flex items-center gap-3">
               <div className="w-12 h-12 rounded-lg bg-[#4f789e]/10 text-[#4f789e] flex items-center justify-center font-bold text-xl">
-                15+
+                {content?.yearsExperience || '15+'}
               </div>
               <div>
                 <p className="text-xs text-gray-500 font-medium">Years Of</p>
@@ -54,13 +54,13 @@ export default function AboutSection({ onOpenQuote }) {
         {/* Right Side: About Content */}
         <div className="lg:col-span-7 space-y-6">
           <span className="text-[#4f789e] text-xs font-bold uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full">
-            Who We Are
+            {content?.badge || 'Who We Are'}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight leading-tight">
-            About Royal Upholstery
+            {content?.title || 'About Royal Furnishing'}
           </h2>
           <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-            At Royal Upholstery, we breathe new life into cherished furniture and craft bespoke seating tailored to Dubai's most luxurious residences, hotels, and corporate spaces. Every stitch, spring, and cushion layer is meticulously executed by seasoned craftsmen dedicated to perfection.
+            {content?.description || "At Royal Furnishing, we breathe new life into cherished furniture and craft bespoke seating tailored to Dubai's most luxurious residences, hotels, and corporate spaces. Every stitch, spring, and cushion layer is meticulously executed by seasoned craftsmen dedicated to perfection."}
           </p>
 
           {/* 4 Feature Points with Icons */}

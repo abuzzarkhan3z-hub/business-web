@@ -33,7 +33,7 @@ export default function WhyChooseUs({ onOpenQuote }) {
           <div className="lg:col-span-6 relative rounded-2xl overflow-hidden shadow-xl min-h-[380px]">
             <img
               src="https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&w=800&q=80"
-              alt="Royal Upholstery Craftsmen Workshop"
+              alt="Royal Furnishing Craftsmen Workshop"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
@@ -58,7 +58,7 @@ export default function WhyChooseUs({ onOpenQuote }) {
                 The Royal Standard
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold mt-3 tracking-tight">
-                Why Choose Royal Upholstery?
+                Why Choose Royal Furnishing?
               </h2>
               <p className="text-blue-100 text-xs sm:text-sm mt-2 leading-relaxed">
                 We combine traditional European upholstery techniques with state-of-the-art cutting tools to ensure flawless longevity for your furniture.

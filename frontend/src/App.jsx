@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -16,10 +16,48 @@ import Testimonials from './components/Testimonials';
 import FaqAndQuote from './components/FaqAndQuote';
 import Footer from './components/Footer';
 import QuoteModal from './components/QuoteModal';
+import AdminPanel from './components/admin/AdminPanel';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('Sofa Upholstery');
+  const [pageContent, setPageContent] = useState(null);
+  const [isAdminOpen, setIsAdminOpen] = useState(
+    () => window.location.hash === '#admin' || window.location.pathname === '/admin'
+  );
+
+  // Sync hash with admin screen
+  useEffect(() => {
+    const handleHashChange = () => {
+      setIsAdminOpen(window.location.hash === '#admin' || window.location.pathname === '/admin');
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handleHashChange);
+    };
+  }, []);
+
+  // Fetch dynamic page content from backend API
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/content');
+        if (response.ok) {
+          const resData = await response.json();
+          if (resData.success && resData.data) {
+            setPageContent(resData.data);
+          }
+        }
+      } catch (err) {
+        // Fallback to default design smoothly if backend is offline
+        console.log('Backend offline or connecting, using default UI data.');
+      }
+    };
+
+    fetchContent();
+  }, []);
 
   const handleOpenQuote = (serviceName) => {
     if (typeof serviceName === 'string') {
@@ -32,20 +70,46 @@ function App() {
     setIsModalOpen(false);
   };
 
+  const handleOpenAdmin = () => {
+    window.location.hash = 'admin';
+    setIsAdminOpen(true);
+  };
+
+  const handleCloseAdmin = () => {
+    window.location.hash = '';
+    setIsAdminOpen(false);
+  };
+
+  // If Admin panel is open, show full Admin studio
+  if (isAdminOpen) {
+    return (
+      <AdminPanel
+        onBack={handleCloseAdmin}
+        onContentUpdated={(updated) => setPageContent(updated)}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans selection:bg-[#4f789e] selection:text-white">
-      {/* 1. Dark Top Bar */}
-      <TopBar />
+      {/* 1. Dark Top Bar with Admin Login Button */}
+      <TopBar onOpenAdmin={handleOpenAdmin} />
 
       {/* 2. Main Navigation Bar */}
       <Navbar onOpenQuote={() => handleOpenQuote('General Inquiry')} />
 
       <main className="flex-grow">
-        {/* 3. Hero Section */}
-        <Hero onContactClick={() => handleOpenQuote('Hero Contact')} />
+        {/* 3. Hero Section (Controlled dynamically from Backend / Admin) */}
+        <Hero
+          content={pageContent?.hero}
+          onContactClick={() => handleOpenQuote('Hero Contact')}
+        />
 
-        {/* 4. Overlapping 3 Promo Cards */}
-        <PromoCards onCardClick={(title) => handleOpenQuote(title)} />
+        {/* 4. Overlapping 3 Promo Cards (Controlled dynamically from Backend / Admin) */}
+        <PromoCards
+          cards={pageContent?.promoCards}
+          onCardClick={(title) => handleOpenQuote(title)}
+        />
 
         {/* 5. Upholstery Services Carousel */}
         <UpholsteryServicesCarousel onOpenQuote={() => handleOpenQuote('Upholstery Services Carousel')} />
@@ -53,8 +117,11 @@ function App() {
         {/* 6. Detailed Services Categories Grid */}
         <ServicesGrid onSelectService={(service) => handleOpenQuote(service)} />
 
-        {/* 7. About Royal Upholstery (Mustard Chair + Highlights) */}
-        <AboutSection onOpenQuote={() => handleOpenQuote('About Consultation')} />
+        {/* 7. About Royal Furnishing (Controlled dynamically from Backend / Admin) */}
+        <AboutSection
+          content={pageContent?.about}
+          onOpenQuote={() => handleOpenQuote('About Consultation')}
+        />
 
         {/* 8. Curated Fabric & Color Swatches */}
         <FabricSwatches onSelectFabric={(fabric) => handleOpenQuote(`Fabric: ${fabric}`)} />
@@ -81,8 +148,8 @@ function App() {
         <FaqAndQuote preselectedService={selectedService} />
       </main>
 
-      {/* 16. Footer */}
-      <Footer />
+      {/* 16. Footer with Admin Portal Link */}
+      <Footer onOpenAdmin={handleOpenAdmin} />
 
       {/* 17. Interactive Quote Request Modal */}
       <QuoteModal

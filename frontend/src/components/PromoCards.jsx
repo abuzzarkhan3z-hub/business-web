@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default function PromoCards({ onCardClick }) {
-  const cards = [
+export default function PromoCards({ cards: customCards, onCardClick }) {
+  const defaultCards = [
     {
       id: 1,
       title: 'Custom Furniture',
@@ -27,6 +27,8 @@ export default function PromoCards({ onCardClick }) {
       image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80',
     },
   ];
+
+  const cards = (customCards && customCards.length > 0) ? customCards : defaultCards;
 
   return (
     <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-8 -mt-12 sm:-mt-16 mb-16">

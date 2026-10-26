@@ -2,7 +2,7 @@ import React from 'react';
 import { Phone, Mail, MapPin, ArrowUp } from 'lucide-react';
 import { FacebookIcon, TwitterXIcon, InstagramIcon, LinkedinIcon } from './SocialIcons';
 
-export default function Footer() {
+export default function Footer({ onOpenAdmin }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -24,7 +24,7 @@ export default function Footer() {
               </div>
               <div>
                 <span className="text-[10px] tracking-[0.2em] font-semibold text-blue-200 block">ROYAL</span>
-                <span className="text-lg font-bold tracking-tight text-white">UPHOLSTERY</span>
+                <span className="text-lg font-bold tracking-tight text-white">FURNISHING</span>
               </div>
             </div>
 
@@ -87,7 +87,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail size={16} className="text-[#f5b027] flex-shrink-0" />
-                <a href="mailto:info@royalupholstery.ae" className="hover:text-white transition-colors">info@royalupholstery.ae</a>
+                <a href="mailto:info@royalfurnishing.ae" className="hover:text-white transition-colors">info@royalfurnishing.ae</a>
               </div>
               <p className="pt-2 text-[11px] text-blue-200">
                 Operating Hours: Sat - Thu (8:30 AM - 8:30 PM)
@@ -98,7 +98,15 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-blue-200/70 gap-4">
-          <p>© 2026 Royal Upholstery LLC. All Rights Reserved. Crafted with precision.</p>
+          <div className="flex items-center gap-3">
+            <p>© 2026 Royal Furnishing LLC. All Rights Reserved. Crafted with precision.</p>
+            <button
+              onClick={onOpenAdmin}
+              className="text-[11px] text-blue-200/60 hover:text-amber-300 underline transition-colors"
+            >
+              Admin Portal
+            </button>
+          </div>
           <button
             onClick={scrollToTop}
             className="flex items-center gap-1.5 hover:text-white transition-colors bg-white/10 px-3 py-1.5 rounded-full"
