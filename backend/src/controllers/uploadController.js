@@ -7,7 +7,7 @@ export const uploadImage = (req, res) => {
   }
 
   // Construct accessible URL for the uploaded image
-  const serverBaseUrl = `${req.protocol}://${req.get('host')}`;
+  const serverBaseUrl = (process.env.BACKEND_URL || `${req.protocol}://${req.get('host')}`).replace(/\/$/, '');
   const relativePath = `/uploads/${req.file.filename}`;
   const fullUrl = `${serverBaseUrl}${relativePath}`;
 

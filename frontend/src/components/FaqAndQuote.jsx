@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Minus, Send, CheckCircle2 } from 'lucide-react';
+import { API_URL } from '../config/api';
 
 export default function FaqAndQuote({ preselectedService }) {
   const [openFaq, setOpenFaq] = useState(0);
@@ -41,7 +42,7 @@ export default function FaqAndQuote({ preselectedService }) {
     setLoading(true);
 
     try {
-      await fetch('http://localhost:5000/api/inquiries', {
+      await fetch(`${API_URL}/inquiries`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

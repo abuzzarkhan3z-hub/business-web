@@ -17,6 +17,7 @@ import FaqAndQuote from './components/FaqAndQuote';
 import Footer from './components/Footer';
 import QuoteModal from './components/QuoteModal';
 import AdminPanel from './components/admin/AdminPanel';
+import { API_URL } from './config/api';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,7 +44,7 @@ function App() {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/content');
+        const response = await fetch(`${API_URL}/content`);
         if (response.ok) {
           const resData = await response.json();
           if (resData.success && resData.data) {

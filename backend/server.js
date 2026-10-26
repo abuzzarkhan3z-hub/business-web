@@ -19,6 +19,7 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
+app.set('trust proxy', 1); // Trust reverse proxy on cloud platforms like Render
 const PORT = process.env.PORT || 5000;
 
 // Connect to Database
